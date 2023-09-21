@@ -1,6 +1,9 @@
 # Single Node GKE Cluster - Terraform
 
-This terraform repo will deploy a single node (by default) GKE cluster for LAB purposes.
+This terraform repo will deploy a single node (by default) GKE cluster for quick LAB purposes. Available in 2 versions:
+
+1. Plain GKE cluster
+1. GKE cluster with Gitlab K8s agent integration
 
 ## Prerequisites
 
@@ -30,11 +33,17 @@ gcloud auth application-default login
 ```
 ## How to use
 
-1. Create a Gitlab Agent for Kubernetes, and retrieve the token.
+### GKE Only 
+
 1. Authenticate `gcloud`
 1. Create a `terraform.tfvars` file ([example](#sample-tfvars-files)) and fill the required [input variables](#terraform-input-vars)
 1. Do `terraform init`
 1. Plan and apply
+
+### GKE with Gitlab K8s agent setup 
+
+1. Create a Gitlab Agent for Kubernetes, and retrieve the token.
+1. Same steps with the GKE Only
 
 ## Sample tfvars files
 
@@ -47,6 +56,11 @@ zone = "asia-southeast2-a"
 machine_type = "e2-small"
 ```
 
+For Gitlab K8s agent setup, include the required variables:
+```
+
+```
+
 ## Terraform input vars
 
 | Name | Description | Type | Default | Required |
@@ -56,6 +70,7 @@ machine_type = "e2-small"
 | zone | GCP Project zone | string | "asia-southeast2-b" | yes |
 | machine\_type | GKE Node Machine type | string | "e2-medium" | yes |
 | node\_count | GKE node count | int | 1 | yes |
-| agent\_namespace | Gitlab agent namespace | string | "gitlab-agent" | yes |
-| agent\_token | Gitlab agent token | string | n/a | yes |
-| kas\_address | KAS address | string | n/a | yes | 
+| is\_preemptible\_node\_pool | Whether the nodepool is preemptible or not | bool | true | yes |
+| agent\_namespace | Gitlab agent namespace | string | "gitlab-agent" | yes in gitlab k8s agent |
+| agent\_token | Gitlab agent token | string | n/a | yes in gitlab k8s agent |
+| kas\_address | KAS address | string | n/a | yes in gitlab k8s agent | 

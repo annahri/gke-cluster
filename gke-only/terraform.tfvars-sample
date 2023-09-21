@@ -1,0 +1,4 @@
+project_id = "main-project"
+region = "asia-southeast2"
+zone = "asia-southeast2-a"
+machine_type = "e2-small"

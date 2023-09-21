@@ -58,7 +58,9 @@ machine_type = "e2-small"
 
 For Gitlab K8s agent setup, include the required variables:
 ```
-
+agent_namespace = "gitlab-agent"
+agent_token = abcdef123456789
+agent_kas_address = wss://gitlab.com/-/kubernetes-agent/"
 ```
 
 ## Terraform input vars
